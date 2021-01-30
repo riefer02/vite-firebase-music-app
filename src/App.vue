@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container mx-auto flex items-center justify-center h-screen w-screen"
+    class="container mx-auto flex flex-col items-center justify-center h-screen w-screen"
   >
     <div
       class="max-w-sm mx-auto bg-gray-200 rounded-xl shadow-md flex flex-col items-center space-x-4 p-6"
@@ -23,16 +23,21 @@
         </div>
       </form>
     </div>
+    {{ data }}
   </div>
 </template>
 
 <script>
-// console.log(import.meta.env);
-// import { fetchAudio } from "./api/audio.js";
+import { fetchAudio } from "./api/audio.js";
 
 export default {
-  mounted() {
-    // fetchAudio();
+  data() {
+    return {
+      data: null,
+    };
+  },
+  async mounted() {
+    this.data = await fetchAudio();
   },
   methods: {
     previewFiles(e) {
