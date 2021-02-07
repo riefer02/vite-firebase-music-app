@@ -22,13 +22,19 @@
           />
         </div>
       </form>
+      <div
+        class="bg-indigo-200 shadow-md rounded-lg p-2 border border-black border-opacity-50 hover:bg-indigo-100 hover:border-opacity-100"
+        @click="uploadAudio"
+      >
+        Db Write Test
+      </div>
     </div>
     {{ data }}
   </div>
 </template>
 
 <script>
-import { fetchAudio } from "./api/audio.js";
+import { fetchAudio, uploadAudio } from "./api/audio.js";
 
 export default {
   data() {
@@ -43,6 +49,7 @@ export default {
     previewFiles(e) {
       console.log(e.target.files);
     },
+    uploadAudio,
   },
 };
 </script>
