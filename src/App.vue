@@ -14,7 +14,7 @@
             name="audio-upload"
             type="file"
             accept="audio/*"
-            @change="previewFiles"
+            @change="handleSubmit"
           />
           <input
             type="submit"
@@ -23,8 +23,24 @@
         </div>
       </form>
       <div
+        @click="
+          register({
+            email: 'andrew.riefenstahl@gmail.com',
+            password: 'legacy21',
+          })
+        "
+        class="bg-indigo-200 shadow-md rounded-lg p-2 m-2 border border-black border-opacity-50 hover:bg-indigo-100 hover:border-opacity-100"
+      >
+        Register
+      </div>
+      <div
+        class="bg-indigo-200 shadow-md rounded-lg p-2 m-2 border border-black border-opacity-50 hover:bg-indigo-100 hover:border-opacity-100"
+      >
+        Login Button
+      </div>
+      <div
         class="bg-indigo-200 shadow-md rounded-lg p-2 border border-black border-opacity-50 hover:bg-indigo-100 hover:border-opacity-100"
-        @click="uploadAudio"
+        @click="uploadToStorage(this.audio)"
       >
         Db Write Test
       </div>
@@ -34,22 +50,26 @@
 </template>
 
 <script>
-import { fetchAudio, uploadAudio } from "./api/audio.js";
+import { fetchAudio, uploadToFirebase, uploadToStorage } from "./api/audio.js";
+import { register } from "./api/auth";
 
 export default {
   data() {
     return {
       data: null,
+      audio: null,
     };
   },
   async mounted() {
     this.data = await fetchAudio();
   },
   methods: {
-    previewFiles(e) {
-      console.log(e.target.files);
+    handleSubmit(e) {
+      this.audio = e.target.files[0];
+      console.log(this.audio);
     },
-    uploadAudio,
+    uploadToStorage,
+    register,
   },
 };
 </script>

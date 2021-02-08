@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/storage";
 
 const config = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -18,4 +19,7 @@ if (!firebase.apps.length) {
   firebaseApp = firebase.app(); // if already initialized, use that one
 }
 const db = firebaseApp.firestore();
+
+export const storage = firebaseApp.storage();
+
 export default db;
